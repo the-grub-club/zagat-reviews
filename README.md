@@ -3,21 +3,7 @@
 A recreation of the frontend for Zagat's reviews page (example: https://www.zagat.com/r/benu-san-francisco.)
 
 This JavaScript app serves static HTML files through an Express server using a 
-Webpack bundle that transpiles a React & jQuery frontend populated with MySQL data.
-
-## Related Projects
-
-Repo link for the photo module at the top of Zagat's page:
-  - https://github.com/the-notorious-f-e-c/zagat-photos-service
-
-Repo link for the map module at the side of Zagat's page:
-  - https://github.com/the-notorious-f-e-c/zagat-restaurant-info
-
-Repo link for the Google Reviews module at the bottom of Zagat's page:
-  - https://github.com/the-notorious-f-e-c/zagat-google-reviews
-
-Repo link for the Zagat reviews module in the middle of Zagat's page:
-  - https://github.com/the-notorious-f-e-c/zagat-reviews
+Webpack bundle that transpiles a React & jQuery frontend populated with PostgreSQL data.
 
 ## Table of Contents
 
@@ -26,25 +12,19 @@ Repo link for the Zagat reviews module in the middle of Zagat's page:
 3. [Development](#development)
 4. [API](#API)
 5. [Dependencies](#Dependencies)
-6. [Authors](#Authors)
-7. [License](#License)
-8. [Acknowledgments](#Acknowledgments)
+6. [License](#License)
 
 ## Usage
 
-1.) To seed the database:
-
-  [ npm run seed ]
-
-2.) To start the server:
+1.) To start the server:
 
   [ npm run start ]
 
-3.) To make webpack watch files:
+2.) To make webpack watch files:
 
   [ npm run react-dev ]
 
-4.) To run Jest & Enzyme tests:
+3.) To run Jest & Enzyme tests:
 
   [ npm run test ]
 
@@ -64,26 +44,21 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 ## API
 
-The on-splash /GET requests for the 100 random data records that dataGenerator.js stores in a MySQL database 'restaurants' are routed to: 
+|     Endpoint       | TYPE |            Operation              |
+|--------------------|------|-----------------------------------|
+| /:id/zagar_reviews | GET  | Get review of specific restaurant |
 
-http://localhost:3001/api/restaurants/:id/reviews
+## SampleCall
 
-This app's development port number was 3001.
-
-Request objects get returned in the following form:
-
-result[0] = {
-    rest_id: 1,
-    name: "CAFE BEAUJOLAIS",
-    type: "Japanese",
-    price: "$$$$",
-    location: "Tenderloin",
-    description: "Museum's bistro for star chef's recipes",
-    foodScore: "2.7",
-    decorScore: "2.4",
-    serviceScore: "0.2",
-    review: "Iure modi eos et expedita. Itaque est cupiditate similique laborum dolorem voluptatum quos. Placeat autem ut exercitationem et. Porro culpa rerum et debitis in voluptates sit sit perferendis. Velit deleniti nostrum ut sunt maxime animi quia sit. Beatae itaque tempora sed quo et ut."
-},
+  ```javascript
+    axios.get(`/api/restaurants/${params.get('id')}/zagat_reviews`)
+    .then((response) => {
+      this.setState({ data: response.data })
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  ```
 
 ## Dependencies
 
@@ -110,7 +85,6 @@ npm install enzyme-adapter-react-16
 Database and Data:
 
 npm install faker
-npm install mysql
 
 Linting:
 
@@ -119,14 +93,6 @@ npm install eslint
 npm install lint-staged
 ```
 
-## Authors
-
-Martin Connor (mepc36@gmail.com)
-
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-## Acknowledgements
-
-Sang Park, Nick Vincent-Hill, Destiny Walker, Connor Homan, Roger Dunn, Eugenia Ong, Rafe Autie, Eric Soderholm

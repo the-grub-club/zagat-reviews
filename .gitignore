@@ -30,3 +30,7 @@ coverage
 build/
 dist/
 client/dist/bundle.js
+
+database/config.js
+
+data.csv

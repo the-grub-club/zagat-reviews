@@ -10,36 +10,33 @@ const randomScore = function () {
 };
 
 const getRandomRecords = function () {
-  const records = [];
-  const restaurantObject = {};
   let oneRestaurant = [];
-  const allRestaurants = [];
+  let allRestaurants = [];
 
-  for (let i = 0; i < 100; i += 1) {
-    const name = getRandomItem(hardData.names).toUpperCase();
-    const type = getRandomItem(hardData.types);
-    const price = getRandomItem(hardData.prices);
-    const location = getRandomItem(hardData.locations);
-    const description = getRandomItem(hardData.descriptions);
-    const foodScore = randomScore();
-    const decorScore = randomScore();
-    const serviceScore = randomScore();
-    const review = faker.lorem.paragraph();
+  for (let i = 0; i < 1000000; i += 1) {
+    let name = faker.company.companyName();
+    let type = getRandomItem(hardData.types);
+    let price = getRandomItem(hardData.prices);
+    let location = getRandomItem(hardData.locations);
+    let description = getRandomItem(hardData.descriptions);
+    let foodScore = randomScore();
+    let decorScore = randomScore();
+    let serviceScore = randomScore();
+    let review = faker.lorem.paragraph().substring(0, 390);
 
     oneRestaurant.push(name, type, price,
       location, description, foodScore,
       decorScore, serviceScore, review);
+    
     allRestaurants.push(oneRestaurant);
-
     oneRestaurant = [];
-
-    records.push(restaurantObject);
   }
+
   return allRestaurants;
 };
 
-const seedData = getRandomRecords();
+var all = getRandomRecords();
 
 module.exports = {
-  seedData,
+  all
 };

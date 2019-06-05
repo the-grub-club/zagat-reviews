@@ -1,10 +1,11 @@
 const mysql = require('mysql');
 const dataGenerator = require('./dataGenerator.js');
+const config = require('./config.js');
 
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'yourpassword',
+  password: config.password,
 });
 
 connection.connect((error1) => {

@@ -39,10 +39,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const id = window.location.pathname.substring(13);
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
     $.ajax({
       method: 'GET',
-      url: `/api/restaurants/${id}/reviews`,
+      url: `/api/restaurants/${params.get('id')}/reviews`,
       success: (result) => {
         console.log('Server success!');
         const newRestaurant = result[0];

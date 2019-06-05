@@ -1,8 +1,0 @@
-version: '3'
-services:
-  start:
-    build: server/
-    ports: 
-      - '9090:9090'
-    depends-on:
-      - 

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const database = require('../database/db.js');
 
 const app = express();
-const port = 3001;
+const port = 7007;
 
 app.use(bodyParser.json());
 
@@ -15,7 +15,7 @@ app.get('/api/restaurants/:id/reviews', (req, res) => {
   const id = req.params.id;
   database.getRecords((error, result) => {
     if (error) {
-      console.log('Error in server!');
+      console.log(error);
       res.status(500);
       res.end('error!');
     } else {

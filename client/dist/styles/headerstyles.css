@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Calibre';
-  src: url('http://localhost:3001/styles/fonts/CalibreWeb-Regular.woff2');
+  src: url('/styles/fonts/CalibreWeb-Regular.woff2');
 }
 
 @font-face {
   font-family: 'Calibre-Semibold';
-  src: url('http://localhost:3001/styles/fonts/CalibreWeb-Semibold.woff2');
+  src: url('/styles/fonts/CalibreWeb-Semibold.woff2');
 }
 
 body {
