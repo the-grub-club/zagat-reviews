@@ -10,26 +10,24 @@ const randomScore = function () {
 };
 
 const getRandomRecords = function () {
-  let oneRestaurant = [];
+
   let allRestaurants = [];
 
-  for (let i = 0; i < 1000000; i += 1) {
-    let name = faker.company.companyName();
-    let type = getRandomItem(hardData.types);
-    let price = getRandomItem(hardData.prices);
-    let location = getRandomItem(hardData.locations);
-    let description = getRandomItem(hardData.descriptions);
-    let foodScore = randomScore();
-    let decorScore = randomScore();
-    let serviceScore = randomScore();
-    let review = faker.lorem.paragraph().substring(0, 390);
-
-    oneRestaurant.push(name, type, price,
-      location, description, foodScore,
-      decorScore, serviceScore, review);
+  for (let i = 7000001; i <= 8000000; i += 1) {
+    oneRestaurant = {
+      _id: i.toString(),
+      name: faker.company.companyName(),
+      type: getRandomItem(hardData.types),
+      price: getRandomItem(hardData.prices),
+      location: getRandomItem(hardData.locations),
+      description: getRandomItem(hardData.descriptions),
+      foodScore: randomScore(),
+      decorScore: randomScore(),
+      serviceScore: randomScore(),
+      review: faker.lorem.paragraph().substring(0, 390),
+    }
     
     allRestaurants.push(oneRestaurant);
-    oneRestaurant = [];
   }
 
   return allRestaurants;

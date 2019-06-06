@@ -43,9 +43,8 @@ class App extends React.Component {
     const params = new URLSearchParams(search);
     $.ajax({
       method: 'GET',
-      url: `/api/restaurants/${params.get('id')}/reviews`,
+      url: `/restaurants/${params.get('id')}/reviews`,
       success: (result) => {
-        console.log('Server success!');
         const newRestaurant = result[0];
         const quotedReview = this.addBoldedQuotes(result[0].review);
         newRestaurant.review = quotedReview;

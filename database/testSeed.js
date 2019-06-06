@@ -4,7 +4,7 @@ const path = require('path');
 
 const csvWriter = createCsvWriter({
   header: ['name', 'type', 'price', 'location', 'description', 'foodScore', 'decorScore', 'serviceScore', 'review'],
-  path: path.join(`${__dirname}/../data.csv`),
+  path: path.join(`${__dirname}/../dataForCouchDB.csv`),
   append: true
 });
 
