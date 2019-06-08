@@ -10,13 +10,11 @@ const randomScore = function () {
 };
 
 const getRandomRecords = function () {
-
   let allRestaurants = [];
-
-  for (let i = 7000001; i <= 8000000; i += 1) {
-    oneRestaurant = {
+  for (let i = 9000001; i <= 10000000; i += 1) {
+    let oneRestaurant = {
       _id: i.toString(),
-      name: faker.company.companyName(),
+      name: faker.company.companyName() + i,
       type: getRandomItem(hardData.types),
       price: getRandomItem(hardData.prices),
       location: getRandomItem(hardData.locations),
@@ -26,12 +24,29 @@ const getRandomRecords = function () {
       serviceScore: randomScore(),
       review: faker.lorem.paragraph().substring(0, 390),
     }
-    
     allRestaurants.push(oneRestaurant);
   }
-
   return allRestaurants;
 };
+
+// FOR POSTGRESQL SHAPE FOR CSV
+
+//   for (let i = 1; i <= 2000000; i += 1) {
+//     let oneRestaurant = [
+//       faker.company.companyName() + i,
+//       getRandomItem(hardData.types),
+//       getRandomItem(hardData.prices),
+//       getRandomItem(hardData.locations),
+//       getRandomItem(hardData.descriptions),
+//       randomScore(),
+//       randomScore(),
+//       randomScore(),
+//       faker.lorem.paragraph().substring(0, 390),
+//     ]
+//     allRestaurants.push(oneRestaurant);
+//   }
+//   return allRestaurants;
+// };
 
 var all = getRandomRecords();
 

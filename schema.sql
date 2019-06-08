@@ -10,3 +10,7 @@ CREATE TABLE zagat_reviews (
   serviceScore VARCHAR(5) NOT NULL,
   review VARCHAR(400) NOT NULL
 );
+
+
+-- COPY zagat_reviews(name,type,price,location,description,foodscore,decorscore,servicescore,review)
+-- FROM '/Users/oe/erzhena/zagat-reviews/data.csv' DELIMITER ',' CSV;

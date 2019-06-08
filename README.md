@@ -146,6 +146,21 @@ Code: 500 Was not able to insert
 Code : 400
 Content: `{ Bad request }`
 
+## SampleCall
+
+  ```javascript
+    $.ajax({
+      method: 'POST',
+      url: `/restaurants/${params.get('id')}/reviews`,
+      success: () => {
+        console.log('Successfully inserted');
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  ```
+
 ## DELETE
 
 URL
