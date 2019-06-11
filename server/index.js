@@ -13,8 +13,7 @@ app.use(bodyParser.json());
 app.use(CORS());
 app.use(express.static(`${__dirname}/../client/dist`));
 
-logger.info('in server');
-app.get('/restaurants/:id/reviews', (req, res) => {
+app.get('/restaurant/:id/review', (req, res) => {
   const id = req.params.id;
   postgresQueries.getRestaurantReviewById((error, result) => {
     if (error) {
@@ -26,6 +25,32 @@ app.get('/restaurants/:id/reviews', (req, res) => {
     }
   }, id);
 });
+
+// Как получить или послать имя?
+app.get('/restaurant/:id/review', (req, res) => {
+  postgresQueries.getRestaurantReviewByName((error, result) => {
+    if (error) {
+      logger.error('Got database error %s', error);
+      res.status(500).send();
+    } else {
+      logger.info('Got data')
+      res.send(result.rows);
+    }
+  }, name);
+});
+
+app.delete('/restaurant/:id/review', (req, res) => {
+  const id = req.params.id;
+  postgresQueries.deleteRestaurantById((error, result) => {
+    if (error) {
+      logger.error('Got not delete from database %s', error);
+      res.status(500).send();
+    } else {
+      logger.info('Deleted..')
+      res.status(200).send();
+    }
+  }, id)
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 

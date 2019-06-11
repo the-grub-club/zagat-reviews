@@ -89,14 +89,14 @@ Content: {
 Error Response:
 
 Code: 404 NOT FOUND 
-Content: `{ Cannot GET /api/restaurants/id/reviews }`
+Content: `{ Cannot GET restaurants/id/review }`
 
 ## SampleCall
 
   ```javascript
     $.ajax({
       method: 'GET',
-      url: `/restaurants/${params.get('id')}/reviews`,
+      url: `/restaurant/${params.get('id')}/review`,
       success: (result) => {
         const newRestaurant = result[0];
         const quotedReview = this.addBoldedQuotes(result[0].review);
@@ -151,7 +151,7 @@ Content: `{ Bad request }`
   ```javascript
     $.ajax({
       method: 'POST',
-      url: `/restaurants/${params.get('id')}/reviews`,
+      url: `/restaurant/${params.get('id')}/review`,
       success: () => {
         console.log('Successfully inserted');
       },
@@ -190,7 +190,7 @@ Code: 500
   ```javascript
     $.ajax({
       method: 'DELETE',
-      url: `/restaurants/${params.get('id')}/reviews`,
+      url: `/restaurant/${params.get('id')}/review`,
       success: () => {
         console.log('Successfully deleted');
       },
@@ -244,7 +244,7 @@ Code: 500
   ```javascript
     $.ajax({
       method: 'PUT',
-      url: `/restaurants/${params.get('id')}/reviews`,
+      url: `/restaurant/${params.get('id')}/review`,
       success: (response) => {
         this.setState({
           currentRestaurant: response,

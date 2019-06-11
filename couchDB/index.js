@@ -7,8 +7,12 @@ const all = require('../database/dataGenerator.js');
 //     console.log('Done', Date.now());
 // });
 
-let startTime = new Date();
-z_reviews.get('10')
-  .then((body) => {
-      console.log(body);
-  });
+// z_reviews.get('10')
+//   .then((body) => {
+//       console.log(body);
+//   });
+
+const q = {selector: {name: {'$eq': 'Ankunding - Gerhold6692313'}}}
+z_reviews.find(q).then((doc) => {
+  console.log(doc);
+});

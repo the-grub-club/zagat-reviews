@@ -15,6 +15,20 @@ const getRestaurantReviewById = (callback, id) => {
   });
 }
 
+const getRestaurantReviewByName = (callback, name) => {
+  pool.query('SELECT * FROM zagat_reviews WHERE name = $1', [name], (error, results) => {
+    if (error) {
+      callback(error, null);
+    } else {
+      callback(null, results);   
+    }
+  });
+}
+
+// const updateRestaurantById = () => {
+//   pool.query('UPDATE zagat_reviews SET ')
+// }
+
 const deleteRestaurantById = (request, response) => {
   const id = parseInt(request.params.id)
 
@@ -28,5 +42,6 @@ const deleteRestaurantById = (request, response) => {
 
 module.exports = {
   getRestaurantReviewById,
+  getRestaurantReviewByName,
   deleteRestaurantById,
 }
