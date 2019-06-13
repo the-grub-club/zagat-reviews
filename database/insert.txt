@@ -1,7 +1,0 @@
-EXPLAIN (ANALYZE, BUFFERS) INSERT INTO zagat_reviews (name,type,price,location,description,foodScore,decorScore,serviceScore,review) VALUES ('Fog City', 'American', '$$$$', 'SOMA', 'Classic dishes in family-friendly place', '3.4', '3.0', '2.8', 'Distinctio similique ut sequi dolore qui qui exercitationem occaecati. Ad mollitia maxime sapiente vel omnis et.');
-
-EXPLAIN (ANALYZE, BUFFERS) UPDATE zagat_reviews SET name = 'New City', price = '$$' WHERE rest_id=10000001;
-EXPLAIN (ANALYZE, BUFFERS) UPDATE zagat_reviews SET price = '$$$', foodScore = '5' WHERE name = 'New City';
-
-EXPLAIN (ANALYZE, BUFFERS) DELETE FROM zagat_reviews WHERE rest_id=10000001;
-EXPLAIN (ANALYZE, BUFFERS) DELETE FROM zagat_reviews WHERE name='Fog City';
