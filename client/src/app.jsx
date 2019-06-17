@@ -41,7 +41,6 @@ class App extends React.Component {
   componentDidMount() {
     const search = window.location.search;
     const params = new URLSearchParams(search);
-    console.log(params.get('id'))
     $.ajax({
       method: 'GET',
       url: `/restaurant/${params.get('id')}/review`,
