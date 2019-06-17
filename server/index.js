@@ -1,3 +1,4 @@
+require('newrelic');
 const express = require('express');
 const logger = require('./winston.js');
 const CORS = require('cors');
@@ -8,15 +9,15 @@ const app = express();
 const port = 7007;
 
 app.use(bodyParser.json());
-
 app.use(CORS());
 app.use(express.static(`${__dirname}/../client/dist`));
 
-app.get('/restaurant/:id/review', (req, res) => {
+const url = '/restaurant/:id/review';
+
+app.get(url, (req, res) => {
   const id = req.params.id;
   postgresQueries.getRestaurantReviewById((error, result) => {
     if (error) {
-      console.log(error)
       logger.error('Got database error %s', error);
       res.status(500).send();
     } else {
@@ -25,18 +26,42 @@ app.get('/restaurant/:id/review', (req, res) => {
   }, id);
 });
 
-
-app.delete('/restaurant/:id/review', (req, res) => {
+app.patch(url, (req, res) => {
   const id = req.params.id;
-  postgresQueries.deleteRestaurantReviewById((error, result) => {
+  postgresQueries.updateRestaurantById(id, req.body, (error, result) => {
     if (error) {
-      logger.error('Got not delete from database %s', error);
+      logger.error('Was not able to update in database %s', error);
       res.status(500).send();
     } else {
-      logger.info('Deleted..')
+      logger.info('Updated..');
       res.status(200).send();
     }
-  }, id)
+  });
+})
+
+app.delete(url, (req, res) => {
+  const id = req.params.id;
+  postgresQueries.deleteRestaurantReviewById(id, (error, result) => {
+    if (error) {
+      logger.error('Was not able to delete from database %s', error);
+      res.status(500).send();
+    } else {
+      logger.info('Deleted..');
+      res.status(200).send();
+    }
+  });
+})
+
+app.post('/addrestaurant/review', (req, res) => {
+  postgresQueries.addRestaurant(req.body, (error, result) => {
+    if (error) {
+      logger.error('Was not able to insert to database %s', error);
+      res.status(500).send();
+    } else {
+      logger.info('Added..');
+      res.status(201).send();
+    }
+  });
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
