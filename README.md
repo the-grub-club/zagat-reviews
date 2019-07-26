@@ -1,52 +1,55 @@
-# Project Name
+# Restaurant's review app
 
-A recreation of the frontend for Zagat's reviews page (example: https://www.zagat.com/r/benu-san-francisco.)
+App displays short description of a restaurant along with different types of scores and location. Handles 1200 RPS with 10,000,000 data entries. 
 
-This JavaScript app serves static HTML files through an Express server using a 
-Webpack bundle that transpiles a React & jQuery frontend populated with PostgreSQL data.
+<img width="1604" alt="pic" src="https://user-images.githubusercontent.com/44889384/61912731-d5dda400-aeef-11e9-91a8-49b26d7d84fe.png">
 
 ## Table of Contents
 
 1. [Usage](#Usage)
-2. [Requirements](#requirements)
-3. [Development](#development)
+2. [Requirements](#Requirements)
+3. [Development](#Development)
 4. [API](#API)
 5. [GET](#GET)
 6. [POST](#POST)
 7. [DELETE](#DELETE)
 8. [PUT](#PUT)
-9. [Dependencies](#Dependencies)
-10. [License](#License)
 
 ## Usage
 
-1.) To start the server:
+Step 1: Clone the repo
+```javascript
+git clone https://github.com/the-grub-club/zagat-reviews.git
+```
 
-  [ npm run start ]
+Step 2: Create table specified in `schema.sql` file
 
-2.) To make webpack watch files:
+Step 3: Seed data 
+```javascript
+node writeToCsv.js
+```
+Use `COPY` command from `schema.sql` file to copy all data from `csv` file to database.
 
-  [ npm run react-dev ]
+Step 4: Compile files with webpack
+```javascript
+$ npm run react-dev
+```
 
-3.) To run Jest & Enzyme tests:
-
-  [ npm run test ]
+Step 5: Start the app
+```javascript
+$ npm start
+```
 
 ## Requirements
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-— Express
-— Webpack
-— React
-— jQuery
-— Jest
-— Enzyme
+* Node.js
+* Git
+* npm
+* PostgreSQL
 
 ## Development
 
-## API
+### **API**
 
 |     Endpoint          | TYPE |             Operation             |
 |-----------------------|------|-----------------------------------|
@@ -55,25 +58,18 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 | restaurant/:id/review |DELETE|      Delete review by id          |
 | restaurant/:id/review |  PUT | Update review of restaurant by id |
 
-## GET
+### **GET**
 
-URL
+URL: `restaurant/:id/review`
 
-`restaurant/:id/review`
+Method: `GET`
 
-Method:
+URL Params Required: id=[integer] (between 1 and 10,000,000)
 
-`GET`
+#### _Success Response:_
 
-URL Params
-
-Required:
-
-id=[integer] (between 1 and 10.000.000)
-
-Success Response:
-
-Code: 200 
+* Code: 200 
+```
 Content: {
         "rest_id": 178,
         "name": "Tillman Group",
@@ -86,12 +82,13 @@ Content: {
         "servicescore": "3.1",
         "review": "Velit aliquid labore aliquid dolore deleniti beatae in laudantium minus. In porro debitis inventore est. Quia delectus mollitia repudiandae occaecati delectus sit quisquam laborum veniam. Nobis a aut et necessitatibus autem. Omnis repellendus consectetur."
         }
-Error Response:
+```
+#### _Error Response:_
 
-Code: 404 NOT FOUND 
-Content: `{ Cannot GET restaurants/id/review }`
+* Code: 404 NOT FOUND 
+* Content: `{ Cannot GET restaurants/id/review }`
 
-## SampleCall
+#### _SampleCall_
 
   ```javascript
     $.ajax({
@@ -111,42 +108,37 @@ Content: `{ Cannot GET restaurants/id/review }`
     });
   ```
 
-## POST
+### **POST**
 
-URL
+URL: `restaurant/:id/review`
 
-`restaurant/:id/review`
+Method: `POST`
 
-Method:
+```
+Data Params: {
+            "rest_id": 178,
+            "name": "Tillman Group",
+            "type": "Japanese",
+            "price": "$$$$",
+            "location": "Forest Hill",
+            "description": "Revolutionary, bi-level kitchen & dining",
+            "foodscore": "2.6",
+            "decorscore": "1.6",
+            "servicescore": "3.1",
+            "review": "Velit aliquid labore aliquid dolore deleniti beatae in laudantium minus. In porro debitis inventore est. Quia delectus mollitia repudiandae occaecati delectus sit quisquam laborum veniam. Nobis a aut et necessitatibus autem. Omnis repellendus consectetur."
+            }
+```
+#### _Success Response:_
 
-`POST`
+* Code: 201 
 
-Data Params
+#### _Error Response:_
 
-{
-  "rest_id": 178,
-  "name": "Tillman Group",
-  "type": "Japanese",
-  "price": "$$$$",
-  "location": "Forest Hill",
-  "description": "Revolutionary, bi-level kitchen & dining",
-  "foodscore": "2.6",
-  "decorscore": "1.6",
-  "servicescore": "3.1",
-  "review": "Velit aliquid labore aliquid dolore deleniti beatae in laudantium minus. In porro debitis inventore est. Quia delectus mollitia repudiandae occaecati delectus sit quisquam laborum veniam. Nobis a aut et necessitatibus autem. Omnis repellendus consectetur."
-}
+* Code: 500 Was not able to insert 
+* Code : 400
+* Content: `{ Bad request }`
 
-Success Response:
-
-Code: 201 
-
-Error Response:
-
-Code: 500 Was not able to insert 
-Code : 400
-Content: `{ Bad request }`
-
-## SampleCall
+#### _SampleCall_
 
   ```javascript
     $.ajax({
@@ -161,31 +153,23 @@ Content: `{ Bad request }`
     });
   ```
 
-## DELETE
+### **DELETE**
 
-URL
+URL: `restaurant/:id/review`
 
-`restaurant/:id/review`
+Method: `DELETE`
 
-Method:
+URL Params Required: id=[integer] (between 1 and 10,000,000)
 
-`DELETE`
+#### _Success Response:_
 
-URL Params
+* Code: 200
 
-Required:
+#### _Error Response:_
 
-id=[integer] (between 1 and 10.000.000)
+* Code: 500
 
-Success Response:
-
-Code: 200
-
-Error Response:
-
-Code: 500
-
-## SampleCall
+#### _SampleCall_
 
   ```javascript
     $.ajax({
@@ -200,46 +184,38 @@ Code: 500
     });
   ```
 
-## PUT
+### **PUT**
 
-URL
+URL: `restaurant/:id/review`
 
-`restaurant/:id/review`
+Method: `PUT`
 
-Method:
+URL Params Required: id=[integer] (between 1 and 10,000,000)
 
-`PUT`
+```
+Data Params: {
+            "rest_id": 178,
+            "name": "Tillman Group",
+            "type": "Japanese",
+            "price": "$$$$",
+            "location": "Forest Hill",
+            "description": "Revolutionary, bi-level kitchen & dining",
+            "foodscore": "2.6",
+            "decorscore": "1.6",
+            "servicescore": "3.1",
+            "review": "Velit aliquid labore aliquid dolore deleniti beatae in laudantium minus. In porro debitis inventore est. Quia delectus mollitia repudiandae occaecati delectus sit quisquam laborum veniam. Nobis a aut et necessitatibus autem. Omnis repellendus consectetur."
+            }
+```
 
-URL Params
+#### _Success Response:_
 
-Required:
+* Code: 200
 
-id=[integer] (between 1 and 10.000.000)
+#### _Error Response:_
 
-Data Params
+* Code: 500
 
-{
-  "rest_id": 178,
-  "name": "Tillman Group",
-  "type": "Japanese",
-  "price": "$$$$",
-  "location": "Forest Hill",
-  "description": "Revolutionary, bi-level kitchen & dining",
-  "foodscore": "2.6",
-  "decorscore": "1.6",
-  "servicescore": "3.1",
-  "review": "Velit aliquid labore aliquid dolore deleniti beatae in laudantium minus. In porro debitis inventore est. Quia delectus mollitia repudiandae occaecati delectus sit quisquam laborum veniam. Nobis a aut et necessitatibus autem. Omnis repellendus consectetur."
-}
-
-Success Response:
-
-Code: 200
-
-Error Response:
-
-Code: 500
-
-## SampleCall
+#### _SampleCall_
 
   ```javascript
     $.ajax({
@@ -256,39 +232,8 @@ Code: 500
     });
   ```
 
-## Dependencies
+  ## Related Projects
 
-From within the root directory:
-
-```sh
-
-General Set-up:
-
-npm init
-npm install webpack
-npm install babel
-npm install jquery
-npm install react
-npm install react-dom
-npm install react-scripts
-
-Tests:
-
-npm install jest
-npm install enzyme
-npm install enzyme-adapter-react-16
-
-Database and Data:
-
-npm install faker
-
-Linting:
-
-npm install husky
-npm install eslint
-npm install lint-staged
-```
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+  * https://github.com/the-grub-club/zagat-reviews-proxy
+  * https://github.com/the-grub-club/zagat-photos
+  * https://github.com/the-grub-club/google-reviews

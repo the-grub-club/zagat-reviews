@@ -1,4 +1,4 @@
-require('newrelic');
+//require('newrelic');
 const express = require('express');
 const logger = require('./winston.js');
 const CORS = require('cors');

@@ -31,8 +31,6 @@ build/
 dist/
 client/dist/bundle.js
 
-database/config.js
-
 data.csv
-
+package-lock.json
 newrelic.js

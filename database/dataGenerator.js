@@ -11,7 +11,7 @@ const randomScore = function () {
 
 const getRandomRecords = function () {
   let allRestaurants = [];
-  for (let i = 1; i <= 2000000; i += 1) {
+  for (let i = 1; i <= 10000000; i += 1) {
     let oneRestaurant = [
       faker.company.companyName() + i,
       getRandomItem(hardData.types),
